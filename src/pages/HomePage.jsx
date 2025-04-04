@@ -3,6 +3,8 @@ import { useSearchResult } from "../contexts/DefaultContext"
 export default function HomePage() {
 
     const { searchResult } = useSearchResult();
+    console.log(searchResult);
+    
 
     return (
         <>
@@ -10,13 +12,13 @@ export default function HomePage() {
 
             <form className="my-5">
                 <div className="mb-3">
-                    <label htmlFor="exampleInputEmail1" className="form-label">Search Movie</label>
-                    <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+                    <label htmlFor="searchText" className="form-label">Search Movies</label>
+                    <input type="text" className="form-control" id="searchText" aria-describedby="searchText" />
                 </div>
                 <button type="submit" className="btn btn-info">Submit</button>
             </form>
 
-            <div>{searchResult}</div>
+            <div></div>
         </>
     )
 }
