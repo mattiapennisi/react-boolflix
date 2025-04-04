@@ -1,6 +1,5 @@
 Milestone 1: 
-Possiamo, cliccando il  
-bottone, cercare sull’API tutti i film che contengono ciò che ha scritto l’utente. 
+Possiamo, cliccando il bottone, cercare sull’API tutti i film che contengono ciò che ha scritto l’utente. 
 Vogliamo dopo la risposta dell’API visualizzare a schermo i seguenti valori per ogni 
 film trovato:  
 1. Titolo 

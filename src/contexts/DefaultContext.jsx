@@ -4,7 +4,7 @@ const DefaultContext = createContext()
 
 function DefaultProvider({ children }) {
 
-    const [searchText, setSearchText] = useState(null)
+    const [searchText, setSearchText] = useState('null')
     const [searchResult, setSearchResult] = useState(null)
 
     const api_key = import.meta.env.VITE_MOVIE_DB_API_KEY
