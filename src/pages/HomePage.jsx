@@ -34,7 +34,7 @@ export default function HomePage() {
                                     <div className="card-body">
                                         <h5 className="card-title">{movie.title}</h5>
                                         <p className="card-text">Original title: {movie.original_title}</p>
-                                        <p className="card-text">Original language: {movie.original_language}</p>
+                                        <p className="card-text">Original language: <img src={`https://flagsapi.com/${movie.original_language.toUpperCase()}/flat/32.png`} /></p>
                                         <p className="card-text">Rating: {movie.vote_average}/10</p>
                                     </div>
                                 </div>
