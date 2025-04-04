@@ -1,5 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
+import { DefaultProvider } from './contexts/DefaultContext.jsx';
+
 import DefaultLayout from './layouts/DefaultLayout.jsx'
 
 import HomePage from './pages/HomePage.jsx'
@@ -9,14 +11,16 @@ function App() {
 
   return (
     <>
-      <BrowserRouter>
-        <Routes>
-          <Route element={<DefaultLayout />}>
-            <Route path='/' element={<HomePage />} />
-            <Route path='*' element={<NotFoundPage />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      <DefaultProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route element={<DefaultLayout />}>
+              <Route path='/' element={<HomePage />} />
+              <Route path='*' element={<NotFoundPage />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </DefaultProvider>
     </>
   )
 }
