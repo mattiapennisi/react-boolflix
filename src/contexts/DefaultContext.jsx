@@ -4,13 +4,12 @@ const DefaultContext = createContext()
 
 function DefaultProvider({ children }) {
 
-    const [defaultState, setDefaultState] = useState(null)
+    const [searchResult, setSearchResult] = useState(null)
 
     return (
         <DefaultContext.Provider
             value={{
-                defaultState,
-                setDefaultState,
+                searchResult,
             }}
         >
             {children}
@@ -18,9 +17,9 @@ function DefaultProvider({ children }) {
     )
 }
 
-function useDefaultState() {
+function useSearchResult() {
     const context = useContext(DefaultContext)
     return context
 }
 
-export { DefaultProvider, useDefaultState }
+export { DefaultProvider, useSearchResult }
