@@ -8,7 +8,7 @@ export default function Header() {
         <header id="header" className="mb-4">
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
                 <div className="container">
-                    <Link className="navbar-brand" to="/">Logo</Link>
+                    <Link className="navbar-brand" to="/">BoolFlix</Link>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarNav" aria-controls="navbarNav"
                         aria-expanded="false" aria-label="Toggle navigation">
