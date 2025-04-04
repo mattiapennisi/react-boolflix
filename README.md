@@ -1,12 +1,3 @@
-Milestone 1: 
-Possiamo, cliccando il bottone, cercare sull’API tutti i film che contengono ciò che ha scritto l’utente. 
-Vogliamo dopo la risposta dell’API visualizzare a schermo i seguenti valori per ogni 
-film trovato:  
-1. Titolo 
-2. Titolo Originale 
-3. Lingua 
-4. Voto 
-
 Milestone 2: 
 Trasformiamo la stringa statica della lingua in una vera e propria bandiera della 
 nazione corrispondente, gestendo il caso in cui non abbiamo la bandiera della 
