@@ -12,6 +12,19 @@ export default function HomePage() {
         setSearchText(searchTextValue)
     }
 
+    function getFlagCode(languageCode) {
+        
+        const languageMap = {
+            'en': 'us',   
+            'ja': 'jp',
+            'ko': 'kr',
+            'zh': 'cn',  
+            'cs': 'cz',   
+        }
+
+        return languageMap[languageCode] || languageCode
+    }
+
     return (
         <>
             <h1 className="text-center">Movie Database</h1>
@@ -34,7 +47,12 @@ export default function HomePage() {
                                     <div className="card-body">
                                         <h5 className="card-title">{movie.title}</h5>
                                         <p className="card-text">Original title: {movie.original_title}</p>
-                                        <p className="card-text">Original language: <img src={`https://flagsapi.com/${movie.original_language.toUpperCase()}/flat/32.png`} /></p>
+                                        <p className="card-text">
+                                            Original language: <img
+                                                src={`https://flagcdn.com/16x12/${getFlagCode(movie.original_language)}.png`}
+                                                alt={movie.original_language}
+                                            />
+                                        </p>
                                         <p className="card-text">Rating: {movie.vote_average}/10</p>
                                     </div>
                                 </div>
