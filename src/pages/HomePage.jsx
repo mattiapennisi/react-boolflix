@@ -26,13 +26,18 @@ export default function HomePage() {
     }
 
     function renderStars(vote) {
+
+        const stars = []
+
         for (let i = 1; i <= vote; i++) {
-            '<i className="fa-solid fa-star"></i>'
+            stars.push(<i className="fa-solid fa-star"></i>)
         }
 
-        for (let i = vote; i <= 5; i++) {
-            '<i className="fa-light fa-star"></i>'
+        for (let i = vote + 1; i <= 5; i++) {
+            stars.push(<i className="fa-regular fa-star"></i>)
         }
+
+        return stars
     }
 
     return (
@@ -65,7 +70,6 @@ export default function HomePage() {
                                         </p>
                                         <p className="card-text">
                                             {renderStars(Math.round(result.vote_average / 2))}
-
                                         </p>
                                     </div>
                                 </div>
