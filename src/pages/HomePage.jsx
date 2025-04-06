@@ -13,13 +13,13 @@ export default function HomePage() {
     }
 
     function getFlagCode(languageCode) {
-        
+
         const languageMap = {
-            'en': 'us',   
+            'en': 'us',
             'ja': 'jp',
             'ko': 'kr',
-            'zh': 'cn',  
-            'cs': 'cz',   
+            'zh': 'cn',
+            'cs': 'cz',
         }
 
         return languageMap[languageCode] || languageCode
@@ -27,33 +27,32 @@ export default function HomePage() {
 
     return (
         <>
-            <h1 className="text-center">Movie Database</h1>
+            <h1 className="text-center">Movies and TV Shows Database</h1>
 
             <form className="my-5" onSubmit={handleSubmit}>
                 <div className="mb-3">
-                    <label htmlFor="searchText" className="form-label">Search Movies</label>
+                    <label htmlFor="searchText" className="form-label">Search Movies or Tv Shows title</label>
                     <input type="text" className="form-control" id="searchText" aria-describedby="searchText" value={searchTextValue} onChange={(e) => setSearchTextValue(e.target.value)} />
                 </div>
                 <button type="submit" className="btn btn-info">Submit</button>
             </form>
 
             {isLoaded ? (
-
-                searchResult && searchResult.results ? (
+                searchResult && searchResult.length > 0 ? (
                     <div className="row">
-                        {searchResult.results.map(movie => (
-                            <div key={movie.id} className="col-md-4 mb-4">
+                        {searchResult.map(result => (
+                            <div key={result.id} className="col-md-4 mb-4">
                                 <div className="card">
                                     <div className="card-body">
-                                        <h5 className="card-title">{movie.title}</h5>
-                                        <p className="card-text">Original title: {movie.original_title}</p>
+                                        <h5 className="card-title py-2">{result.title || result.name}</h5>
+                                        <p className="card-text">Original title: {result.original_title || result.original_name}</p>
                                         <p className="card-text">
                                             Original language: <img
-                                                src={`https://flagcdn.com/16x12/${getFlagCode(movie.original_language)}.png`}
-                                                alt={movie.original_language}
+                                                src={`https://flagcdn.com/16x12/${getFlagCode(result.original_language)}.png`}
+                                                alt={result.original_language}
                                             />
                                         </p>
-                                        <p className="card-text">Rating: {movie.vote_average}/10</p>
+                                        <p className="card-text">Rating: {result.vote_average}/10</p>
                                     </div>
                                 </div>
                             </div>
