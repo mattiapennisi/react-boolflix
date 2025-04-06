@@ -1,28 +1,37 @@
-import { Link, NavLink } from 'react-router-dom'
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
+
+import { useSearchResult } from "../contexts/DefaultContext"
 
 export default function Header() {
 
-    const navLinkClass = ({ isActive }) => isActive ? "nav-link active" : "nav-link";
+    const { searchText, setSearchText } = useSearchResult()
+    const [searchTextValue, setSearchTextValue] = useState('')
+
+    function handleSubmit(e) {
+        e.preventDefault()
+
+        setSearchText(searchTextValue)
+        setSearchTextValue('')
+    }
 
     return (
         <header id="header" className="mb-4">
             <nav className="navbar navbar-expand-lg">
                 <div className="container">
+
                     <Link className="navbar-brand" to="/">
                         <img src="https://image.tmdb.org/t/p/w342/wwemzKWzjKYJFfCeiB57q3r4Bcm.png" alt="Netflix logo" />
                     </Link>
-                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarNav" aria-controls="navbarNav"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                        <span className="navbar-toggler-icon"></span>
-                    </button>
-                    <div className="collapse navbar-collapse" id="navbarNav">
-                        <ul className="navbar-nav ms-auto">
-                            <li className="nav-item">
-                                <NavLink className={navLinkClass} to="/">Home</NavLink>
-                            </li>
-                        </ul>
-                    </div>
+
+                    <form className="my-5 d-flex gap-3" onSubmit={handleSubmit}>
+                        <div className="mb-3 d-flex gap-3">
+                            <label htmlFor="searchText" className="form-label"><i className="fa-solid fa-search"></i></label>
+                            <input type="text" className="form-control" id="searchText" aria-describedby="searchText" value={searchTextValue} onChange={(e) => setSearchTextValue(e.target.value)} />
+                        </div>
+                        <button type="submit" className="btn btn-danger">Submit</button>
+                    </form>
+
                 </div>
             </nav>
         </header>

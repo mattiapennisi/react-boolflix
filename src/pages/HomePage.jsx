@@ -1,16 +1,7 @@
-import { useState } from 'react'
-
 import { useSearchResult } from "../contexts/DefaultContext"
 
 export default function HomePage() {
-    const { searchText, setSearchText, searchResult, isLoaded } = useSearchResult()
-    const [searchTextValue, setSearchTextValue] = useState('')
-
-    function handleSubmit(e) {
-        e.preventDefault()
-
-        setSearchText(searchTextValue)
-    }
+    const { searchResult, isLoaded } = useSearchResult()
 
     function getFlagCode(languageCode) {
 
@@ -42,23 +33,15 @@ export default function HomePage() {
 
     return (
         <>
-            <h1 className="text-center">Unlimited movies, TV shows, and more</h1>
-
-            <form className="my-5" onSubmit={handleSubmit}>
-                <div className="mb-3">
-                    <label htmlFor="searchText" className="form-label">Search for movies or tv shows</label>
-                    <input type="text" className="form-control" id="searchText" aria-describedby="searchText" value={searchTextValue} onChange={(e) => setSearchTextValue(e.target.value)} />
-                </div>
-                <button type="submit" className="btn btn-danger">Submit</button>
-            </form>
+            <h1 className="text-center mb-5">Unlimited movies, TV shows, and more</h1>
 
             {isLoaded ? (
                 searchResult && searchResult.length > 0 ? (
-                    <div className="row">
+                    <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
                         {searchResult.map(result => (
                             <div
                                 key={result.id}
-                                className="col-md-4 mb-4"
+                                className="col mb-4"
                             >
                                 <div className="card"
                                     style={{
@@ -66,7 +49,6 @@ export default function HomePage() {
                                         backgroundSize: 'cover',
                                         backgroundRepeat: 'no-repeat',
                                         backgroundPosition: 'center',
-                                        minHeight: '300px',
                                         backgroundColor: 'rgb(20, 20, 20)'
                                     }}>
                                     <div className="card-body">
@@ -81,6 +63,7 @@ export default function HomePage() {
                                         <p className="card-text">
                                             {renderStars(Math.round(result.vote_average / 2))}
                                         </p>
+                                        <p className="card-text"> {result.overview.substring(0, 200) + '...'}</p>
                                     </div>
                                 </div>
                             </div>
