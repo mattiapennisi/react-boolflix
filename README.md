@@ -1,7 +1,4 @@
 <!-- 
-Milestone 3: 
-Trasformiamo poi il voto da 1 a 10 decimale in un numero intero da 1 a 5, così da permetterci di stampare a schermo un numero di stelle piene che vanno da 1 a 5, lasciando le restanti vuote (troviamo le icone in FontAwesome). 
-
 Milestone 4: 
 Trasformiamo quello che abbiamo fatto fino ad ora in una vera e propria webapp, creando un layout completo simil-Netflix: 
 ● Un header che contiene logo e search bar 

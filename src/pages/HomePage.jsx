@@ -25,6 +25,16 @@ export default function HomePage() {
         return languageMap[languageCode] || languageCode
     }
 
+    function renderStars(vote) {
+        for (let i = 1; i <= vote; i++) {
+            '<i className="fa-solid fa-star"></i>'
+        }
+
+        for (let i = vote; i <= 5; i++) {
+            '<i className="fa-light fa-star"></i>'
+        }
+    }
+
     return (
         <>
             <h1 className="text-center">Movies and TV Shows Database</h1>
@@ -54,8 +64,9 @@ export default function HomePage() {
                                             />
                                         </p>
                                         <p className="card-text">
-                                            {Math.round(result.vote_average/2)} <i class="fa fa-star" aria-hidden="true"></i> 
-                                            </p>
+                                            {renderStars(Math.round(result.vote_average / 2))}
+
+                                        </p>
                                     </div>
                                 </div>
                             </div>
