@@ -6,7 +6,7 @@ export default function Header() {
 
     return (
         <header id="header" className="mb-4">
-            <nav className="navbar navbar-expand-lg navbar-light bg-light">
+            <nav className="navbar navbar-expand-lg">
                 <div className="container">
                     <Link className="navbar-brand" to="/">
                         <img src="https://image.tmdb.org/t/p/w342/wwemzKWzjKYJFfCeiB57q3r4Bcm.png" alt="Netflix logo" />
