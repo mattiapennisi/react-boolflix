@@ -24,13 +24,14 @@ function DefaultProvider({ children }) {
             .then(([moviesData, tvShowsData]) => {
                 setSearchResult([...moviesData.results, ...tvShowsData.results])
                 setIsLoaded(true)
+                console.log(moviesData.results, tvShowsData.results)
             })
             .catch(err => {
                 console.error(err)
                 setSearchResult([])
                 setIsLoaded(true)
             })
-            
+
     }, [api_key, searchText])
 
     return (

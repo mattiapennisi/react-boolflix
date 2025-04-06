@@ -9,6 +9,10 @@ body {
 /* Header */
 #header {
     width: 100%;
+
+    img {
+        width: 100px;
+    }
 }
 
 /* Main */
@@ -18,7 +22,9 @@ body {
     flex: 1 0 auto;
 
     .card {
-        min-height: 200px;
+        height: 500px;
+        overflow: auto;
+        scrollbar-width: none; 
     }
 }
 

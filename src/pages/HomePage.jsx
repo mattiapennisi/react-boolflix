@@ -44,7 +44,8 @@ export default function HomePage() {
                             <div key={result.id} className="col-md-4 mb-4">
                                 <div className="card">
                                     <div className="card-body">
-                                        <h5 className="card-title py-2">{result.title || result.name}</h5>
+                                        <h5 className="card-title pb-4">{result.title || result.name}</h5>
+                                        <img src={`https://image.tmdb.org/t/p/w185/${result.poster_path}`} alt="Movie/Tv Show poster" className='mb-3' />
                                         <p className="card-text">Original title: {result.original_title || result.original_name}</p>
                                         <p className="card-text">
                                             Original language: <img
