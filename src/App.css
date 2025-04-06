@@ -4,15 +4,15 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    background-color: black !important;
-    color: white !important;
+    background-color: rgb(20, 20, 20) !important;
+    color: #fff !important;
 }
 
 /* Header */
 #header {
     width: 100%;
-    background-color: black;
-    color: white;
+    background-color: rgb(20, 20, 20);
+    color: #fff;
     position: sticky;
     top: 0;
     left: 0;
@@ -28,16 +28,20 @@ body {
     width: 100%;
     min-height: 70vh;
     flex: 1 0 auto;
-    background-color: black;
-    color: white;
+    background-color: rgb(20, 20, 20);
+    color: #fff;
 
     .card {
         height: 500px;
         overflow: auto;
         scrollbar-width: none;
-        background-color: black;
-        color: white;
-        border: 1px solid #fff;
+        background-color: rgb(20, 20, 20);
+        color: #fff;
+
+        .card-body {
+            background-color: rgba(20, 20, 20, 0.888);
+            background-size: cover;
+        }
 
         i {
             color: rgb(226, 226, 33);
@@ -49,6 +53,6 @@ body {
 #footer {
     width: 100%;
     margin-top: auto;
-    background-color: black;
-    color: white;
+    background-color: rgb(20, 20, 20);
+    color: #fff;
 }

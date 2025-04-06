@@ -42,25 +42,35 @@ export default function HomePage() {
 
     return (
         <>
-            <h1 className="text-center">Movies and TV Shows Database</h1>
+            <h1 className="text-center">Unlimited movies, TV shows, and more</h1>
 
             <form className="my-5" onSubmit={handleSubmit}>
                 <div className="mb-3">
-                    <label htmlFor="searchText" className="form-label">Search Movies or Tv Shows title</label>
+                    <label htmlFor="searchText" className="form-label">Search for movies or tv shows</label>
                     <input type="text" className="form-control" id="searchText" aria-describedby="searchText" value={searchTextValue} onChange={(e) => setSearchTextValue(e.target.value)} />
                 </div>
-                <button type="submit" className="btn btn-info">Submit</button>
+                <button type="submit" className="btn btn-danger">Submit</button>
             </form>
 
             {isLoaded ? (
                 searchResult && searchResult.length > 0 ? (
                     <div className="row">
                         {searchResult.map(result => (
-                            <div key={result.id} className="col-md-4 mb-4">
-                                <div className="card">
+                            <div
+                                key={result.id}
+                                className="col-md-4 mb-4"
+                            >
+                                <div className="card"
+                                    style={{
+                                        backgroundImage: `url(https://image.tmdb.org/t/p/w342/${result.poster_path})`,
+                                        backgroundSize: 'cover',
+                                        backgroundRepeat: 'no-repeat',
+                                        backgroundPosition: 'center',
+                                        minHeight: '300px',
+                                        backgroundColor: 'rgb(20, 20, 20)'
+                                    }}>
                                     <div className="card-body">
                                         <h5 className="card-title pb-4">{result.title || result.name}</h5>
-                                        <img src={`https://image.tmdb.org/t/p/w185/${result.poster_path}`} alt="Movie/Tv Show poster" className='mb-3' />
                                         <p className="card-text">Original title: {result.original_title || result.original_name}</p>
                                         <p className="card-text">
                                             Original language: <img
