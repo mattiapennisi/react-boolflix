@@ -53,7 +53,9 @@ export default function HomePage() {
                                                 alt={result.original_language}
                                             />
                                         </p>
-                                        <p className="card-text">Rating: {result.vote_average}/10</p>
+                                        <p className="card-text">
+                                            {Math.round(result.vote_average/2)} <i class="fa fa-star" aria-hidden="true"></i> 
+                                            </p>
                                     </div>
                                 </div>
                             </div>
