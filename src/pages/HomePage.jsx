@@ -1,5 +1,5 @@
+import { useState } from "react"
 import { useSearchResult } from "../contexts/DefaultContext"
-import { getMoreInfo } from "../contexts/DefaultContext"
 
 export default function HomePage() {
     const { searchResult, isLoaded } = useSearchResult()
@@ -157,8 +157,24 @@ export default function HomePage() {
         return convertedGenres
     }
 
-    function handleCastClick() {
+    const [actors, setActors] = useState('')
 
+    function handleCastClick(id, mediaType, apiKey) {
+        const endpoint = mediaType === 'movie'
+            ? `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${apiKey}`
+            : `https://api.themoviedb.org/3/tv/${id}/credits?api_key=${apiKey}`
+
+        return fetch(endpoint)
+            .then(res => res.json())
+            .then(data => {
+                const actorsData = data.cast.slice(0, 5)
+                const actorsNames = actorsData.map(actor => actor.name)
+                setActors(actorsNames.join(', '))
+            })
+            .catch(err => {
+                console.error(err)
+                return ''
+            });
     }
 
     return (
@@ -175,9 +191,9 @@ export default function HomePage() {
                             >
                                 <div className="card"
                                     style={{
-                                        backgroundImage: result.poster_path 
+                                        backgroundImage: result.poster_path
                                             ? `url(https://image.tmdb.org/t/p/w342/${result.poster_path})`
-                                            : 'url(https://via.placeholder.com/342x513?text=No+Image)',
+                                            : 'url(https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1200px-No-Image-Placeholder.svg.png)',
                                         backgroundSize: 'cover',
                                         backgroundRepeat: 'no-repeat',
                                         backgroundPosition: 'center',
@@ -201,10 +217,10 @@ export default function HomePage() {
                                         <p className="card-text">
                                             {result.overview.substring(0, 200) + '...'}
                                         </p>
-                                        <button className="btn btn-danger" onClick={() => handleCastClick()}>
+                                        <button className="btn btn-danger mb-3" onClick={() => handleCastClick(result.id, result.media_type, import.meta.env.VITE_MOVIE_DB_API_KEY)}>
                                             Cast
                                         </button>
-                                        <p>Actors: {actors}</p>
+                                        <p className="mb-3">Actors: {actors}</p>
                                     </div>
                                 </div>
                             </div>

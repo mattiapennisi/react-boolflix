@@ -53,22 +53,4 @@ function useSearchResult() {
     return context
 }
 
-export function getMoreInfo(id, mediaType = 'movie', apiKey) {
-    const endpoint = mediaType === 'movie'
-        ? `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${apiKey}`
-        : `https://api.themoviedb.org/3/tv/${id}/credits?api_key=${apiKey}`;
-
-    return fetch(endpoint)
-        .then(res => res.json())
-        .then(data => {
-            const actorsData = data.cast.slice(0, 5)
-            const actorsNames = actorsData.map(actor => actor.name)
-            return actorsNames.join(', ')
-        })
-        .catch(err => {
-            console.error(err)
-            return ''
-        });
-}
-
 export { DefaultProvider, useSearchResult }
