@@ -11,8 +11,8 @@ function DefaultProvider({ children }) {
 
     useEffect(() => {
 
-        const base_movies_api_url = `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${searchText}`
-        const base_tv_shows_api_url = `https://api.themoviedb.org/3/search/tv?api_key=${api_key}&query=${searchText}`
+        const base_movies_api_url = `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${searchText}&append_to_response=credits`
+        const base_tv_shows_api_url = `https://api.themoviedb.org/3/search/tv?api_key=${api_key}&query=${searchText}&append_to_response=credits`
 
         const fetchMovies = fetch(base_movies_api_url)
             .then(res => res.json())
@@ -53,4 +53,19 @@ function useSearchResult() {
     return context
 }
 
-export { DefaultProvider, useSearchResult }
+function getMoreInfo(id) {
+    fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${api_key}&append_to_response=credits`)
+        .then(res => res.json())
+        .then(data => {
+            if (media-type === 'movie') {
+                console.log(data)
+            } else if (media-type === 'tv') {
+                console.log(data)
+            }
+        })
+        .catch(err => {
+            console.error(err)
+        })
+}
+
+export { DefaultProvider, useSearchResult, getMoreInfo }

@@ -31,6 +31,10 @@ export default function HomePage() {
         return stars
     }
 
+    function getGenres(ids) {
+
+    }
+
     return (
         <>
             <h1 className="text-center mb-5">Unlimited movies, TV shows, and more</h1>
@@ -63,7 +67,13 @@ export default function HomePage() {
                                         <p className="card-text">
                                             {renderStars(Math.round(result.vote_average / 2))}
                                         </p>
-                                        <p className="card-text"> {result.overview.substring(0, 200) + '...'}</p>
+                                        <p className="card-text">
+                                            Genres: {result.genre_ids.join(', ')}
+                                        </p>
+                                        <p className="card-text">
+                                            {result.overview.substring(0, 200) + '...'}
+                                        </p>
+                                        <button className="btn btn-danger">Cast</button>
                                     </div>
                                 </div>
                             </div>
