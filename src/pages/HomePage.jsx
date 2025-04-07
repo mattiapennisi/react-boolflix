@@ -66,10 +66,6 @@ export default function HomePage() {
                 "name": "Music"
             },
             {
-                "id": 9648,
-                "name": "Mystery"
-            },
-            {
                 "id": 10749,
                 "name": "Romance"
             },
@@ -112,10 +108,6 @@ export default function HomePage() {
             {
                 "id": 18,
                 "name": "Drama"
-            },
-            {
-                "id": 10751,
-                "name": "Family"
             },
             {
                 "id": 10762,
