@@ -157,7 +157,7 @@ export default function HomePage() {
         return convertedGenres
     }
 
-    const [actors, setActors] = useState('')
+    const [actors, setActors] = useState({})
 
     function handleCastClick(id, mediaType, apiKey) {
         const endpoint = mediaType === 'movie'
@@ -169,7 +169,10 @@ export default function HomePage() {
             .then(data => {
                 const actorsData = data.cast.slice(0, 5)
                 const actorsNames = actorsData.map(actor => actor.name)
-                setActors(actorsNames.join(', '))
+                setActors(prevState => ({
+                    ...prevState,
+                    [id]: actorsNames.join(', ')
+                }))
             })
             .catch(err => {
                 console.error(err)
@@ -215,12 +218,12 @@ export default function HomePage() {
                                             Genres: {getGenres(result.genre_ids).join(', ')}
                                         </p>
                                         <p className="card-text">
-                                            {result.overview.substring(0, 200) + '...'}
+                                            {result.overview.substring(0, 50) + '...'}
                                         </p>
                                         <button className="btn btn-danger mb-3" onClick={() => handleCastClick(result.id, result.media_type, import.meta.env.VITE_MOVIE_DB_API_KEY)}>
                                             Cast
                                         </button>
-                                        <p className="mb-3">Actors: {actors}</p>
+                                        <p className="mb-3">{actors[result.id]}</p>
                                     </div>
                                 </div>
                             </div>
