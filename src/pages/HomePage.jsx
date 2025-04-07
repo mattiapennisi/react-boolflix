@@ -154,32 +154,37 @@ export default function HomePage() {
             })
         })
 
+        console.log(convertedGenres);
+
         return convertedGenres
     }
 
-    const [actors, setActors] = useState({})
-
-    function handleCastClick(id, mediaType, apiKey) {
-        const endpoint = mediaType === 'movie'
-            ? `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${apiKey}`
-            : `https://api.themoviedb.org/3/tv/${id}/credits?api_key=${apiKey}`
-
-        return fetch(endpoint)
-            .then(res => res.json())
-            .then(data => {
-                const actorsData = data.cast.slice(0, 5)
-                const actorsNames = actorsData.map(actor => actor.name)
-                setActors(prevState => ({
-                    ...prevState,
-                    [id]: actorsNames.join(', ')
-                }))
-            })
-            .catch(err => {
-                console.error(err)
-                return ''
-            });
-    }
-
+    /*     const [actors, setActors] = useState({})
+    
+        function handleCastClick(id, mediaType, apiKey) {
+            const endpoint = mediaType === 'movie'
+                ? `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${apiKey}`
+                : `https://api.themoviedb.org/3/tv/${id}/credits?api_key=${apiKey}`
+    
+            return fetch(endpoint)
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                    const actorsData = data.cast.slice(0, 5)
+                    console.log(actorsData)
+                    const actorsNames = actorsData.map(actor => actor.name)
+                    setActors(prevState => ({
+                        ...prevState,
+                        [id]: actorsNames.join(', ')
+                    }))
+                    console.log(actors)
+                })
+                .catch(err => {
+                    console.error(err)
+                    return ''
+                });
+        }
+     */
     return (
         <>
             <h1 className="text-center mb-5">Unlimited movies, TV shows, and more</h1>
@@ -187,47 +192,55 @@ export default function HomePage() {
             {isLoaded ? (
                 searchResult && searchResult.length > 0 ? (
                     <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
-                        {searchResult.map(result => (
-                            <div
-                                key={result.id}
-                                className="col mb-4"
-                            >
-                                <div className="card"
-                                    style={{
-                                        backgroundImage: result.poster_path
-                                            ? `url(https://image.tmdb.org/t/p/w342/${result.poster_path})`
-                                            : 'url(https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1200px-No-Image-Placeholder.svg.png)',
-                                        backgroundSize: 'cover',
-                                        backgroundRepeat: 'no-repeat',
-                                        backgroundPosition: 'center',
-                                        backgroundColor: 'rgb(20, 20, 20)'
-                                    }}>
-                                    <div className="card-body">
-                                        <h5 className="card-title pb-4">{result.title || result.name}</h5>
-                                        <p className="card-text">Original title: {result.original_title || result.original_name}</p>
-                                        <p className="card-text">
-                                            Original language: <img
-                                                src={`https://flagcdn.com/16x12/${getFlagCode(result.original_language)}.png`}
-                                                alt={result.original_language}
-                                            />
-                                        </p>
-                                        <p className="card-text">
-                                            {renderStars(Math.round(result.vote_average / 2))}
-                                        </p>
-                                        <p className="card-text">
-                                            Genres: {getGenres(result.genre_ids).join(', ')}
-                                        </p>
-                                        <p className="card-text">
-                                            {result.overview.substring(0, 50) + '...'}
-                                        </p>
-                                        <button className="btn btn-danger mb-3" onClick={() => handleCastClick(result.id, result.media_type, import.meta.env.VITE_MOVIE_DB_API_KEY)}>
-                                            Cast
-                                        </button>
-                                        <p className="mb-3">{actors[result.id]}</p>
+                        {searchResult
+                            .filter(result => {
+
+                                return result.genre_ids &&
+                                    result.genre_ids.includes(12) &&
+                                    result.genre_ids.includes(14)
+
+                            })
+                            .map(result => (
+                                <div
+                                    key={result.id}
+                                    className="col mb-4"
+                                >
+                                    <div className="card"
+                                        style={{
+                                            backgroundImage: result.poster_path
+                                                ? `url(https://image.tmdb.org/t/p/w342/${result.poster_path})`
+                                                : 'url(https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1200px-No-Image-Placeholder.svg.png)',
+                                            backgroundSize: 'cover',
+                                            backgroundRepeat: 'no-repeat',
+                                            backgroundPosition: 'center',
+                                            backgroundColor: 'rgb(20, 20, 20)'
+                                        }}>
+                                        <div className="card-body">
+                                            <h5 className="card-title pb-4">{result.title || result.name}</h5>
+                                            <p className="card-text">Original title: {result.original_title || result.original_name}</p>
+                                            <p className="card-text">
+                                                Original language: <img
+                                                    src={`https://flagcdn.com/16x12/${getFlagCode(result.original_language)}.png`}
+                                                    alt={result.original_language}
+                                                />
+                                            </p>
+                                            <p className="card-text">
+                                                {renderStars(Math.round(result.vote_average / 2))}
+                                            </p>
+                                            <p className="card-text">
+                                                Genres: {getGenres(result.genre_ids).join(', ')}
+                                            </p>
+                                            <p className="card-text">
+                                                {result.overview ? (result.overview.substring(0, 50) + '...') : 'No overview available'}
+                                            </p>
+                                            {/* <button className="btn btn-danger mb-3" onClick={() => handleCastClick(result.id, result.media_type, import.meta.env.VITE_MOVIE_DB_API_KEY)}>
+                                                Cast
+                                            </button>
+                                            <p className="mb-3">{actors[result.id]}</p> */}
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        ))}
+                            ))}
                     </div>
                 ) : (
                     <div>No results found</div>
