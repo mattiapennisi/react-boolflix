@@ -9,10 +9,12 @@ function DefaultProvider({ children }) {
 
     const api_key = import.meta.env.VITE_MOVIE_DB_API_KEY
 
+    const [genresToFilter, setGenresToFilter]= useState([])
+
     useEffect(() => {
 
-        const base_movies_api_url = `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${searchText}&append_to_response=credits`
-        const base_tv_shows_api_url = `https://api.themoviedb.org/3/search/tv?api_key=${api_key}&query=${searchText}&append_to_response=credits`
+        const base_movies_api_url = `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${searchText}`
+        const base_tv_shows_api_url = `https://api.themoviedb.org/3/search/tv?api_key=${api_key}&query=${searchText}`
 
         const fetchMovies = fetch(base_movies_api_url)
             .then(res => res.json())
@@ -41,6 +43,7 @@ function DefaultProvider({ children }) {
                 searchText,
                 setSearchText,
                 searchResult,
+                genresToFilter,
             }}
         >
             {children}

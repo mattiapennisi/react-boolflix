@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useSearchResult } from "../contexts/DefaultContext"
 
 export default function HomePage() {
-    const { searchResult, isLoaded } = useSearchResult()
+    const { searchResult, isLoaded, genresToFilter } = useSearchResult()
 
     function getFlagCode(languageCode) {
 
@@ -159,32 +159,32 @@ export default function HomePage() {
         return convertedGenres
     }
 
-    /*     const [actors, setActors] = useState({})
-    
-        function handleCastClick(id, mediaType, apiKey) {
-            const endpoint = mediaType === 'movie'
-                ? `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${apiKey}`
-                : `https://api.themoviedb.org/3/tv/${id}/credits?api_key=${apiKey}`
-    
-            return fetch(endpoint)
-                .then(res => res.json())
-                .then(data => {
-                    console.log(data);
-                    const actorsData = data.cast.slice(0, 5)
-                    console.log(actorsData)
-                    const actorsNames = actorsData.map(actor => actor.name)
-                    setActors(prevState => ({
-                        ...prevState,
-                        [id]: actorsNames.join(', ')
-                    }))
-                    console.log(actors)
-                })
-                .catch(err => {
-                    console.error(err)
-                    return ''
-                });
-        }
-     */
+    const [actors, setActors] = useState({})
+
+    function handleCastClick(id, mediaType, apiKey) {
+        const endpoint = mediaType === 'movie'
+            ? `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${apiKey}`
+            : `https://api.themoviedb.org/3/tv/${id}/credits?api_key=${apiKey}`
+
+        return fetch(endpoint)
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                const actorsData = data.cast.slice(0, 5)
+                console.log(actorsData)
+                const actorsNames = actorsData.map(actor => actor.name)
+                setActors(prevState => ({
+                    ...prevState,
+                    [id]: actorsNames.join(', ')
+                }))
+                console.log(actors)
+            })
+            .catch(err => {
+                console.error(err)
+                return ''
+            });
+    }
+
     return (
         <>
             <h1 className="text-center mb-5">Unlimited movies, TV shows, and more</h1>
@@ -194,11 +194,8 @@ export default function HomePage() {
                     <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
                         {searchResult
                             .filter(result => {
-
                                 return result.genre_ids &&
-                                    result.genre_ids.includes(12) &&
-                                    result.genre_ids.includes(14)
-
+                                    genresToFilter.every(genreId => result.genre_ids.includes(genreId))
                             })
                             .map(result => (
                                 <div
@@ -233,10 +230,10 @@ export default function HomePage() {
                                             <p className="card-text">
                                                 {result.overview ? (result.overview.substring(0, 50) + '...') : 'No overview available'}
                                             </p>
-                                            {/* <button className="btn btn-danger mb-3" onClick={() => handleCastClick(result.id, result.media_type, import.meta.env.VITE_MOVIE_DB_API_KEY)}>
+                                            <button className="btn btn-danger mb-3" onClick={() => handleCastClick(result.id, result.media_type, import.meta.env.VITE_MOVIE_DB_API_KEY)}>
                                                 Cast
                                             </button>
-                                            <p className="mb-3">{actors[result.id]}</p> */}
+                                            <p className="mb-3">{actors[result.id]}</p>
                                         </div>
                                     </div>
                                 </div>
