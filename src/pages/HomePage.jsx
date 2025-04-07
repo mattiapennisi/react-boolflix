@@ -1,4 +1,5 @@
 import { useSearchResult } from "../contexts/DefaultContext"
+import { getMoreInfo } from "../contexts/DefaultContext"
 
 export default function HomePage() {
     const { searchResult, isLoaded } = useSearchResult()
@@ -156,6 +157,10 @@ export default function HomePage() {
         return convertedGenres
     }
 
+    function handleCastClick() {
+
+    }
+
     return (
         <>
             <h1 className="text-center mb-5">Unlimited movies, TV shows, and more</h1>
@@ -170,7 +175,9 @@ export default function HomePage() {
                             >
                                 <div className="card"
                                     style={{
-                                        backgroundImage: `url(https://image.tmdb.org/t/p/w342/${result.poster_path})`,
+                                        backgroundImage: result.poster_path 
+                                            ? `url(https://image.tmdb.org/t/p/w342/${result.poster_path})`
+                                            : 'url(https://via.placeholder.com/342x513?text=No+Image)',
                                         backgroundSize: 'cover',
                                         backgroundRepeat: 'no-repeat',
                                         backgroundPosition: 'center',
@@ -194,7 +201,10 @@ export default function HomePage() {
                                         <p className="card-text">
                                             {result.overview.substring(0, 200) + '...'}
                                         </p>
-                                        <button className="btn btn-danger">Cast</button>
+                                        <button className="btn btn-danger" onClick={() => handleCastClick()}>
+                                            Cast
+                                        </button>
+                                        <p>Actors: {actors}</p>
                                     </div>
                                 </div>
                             </div>
